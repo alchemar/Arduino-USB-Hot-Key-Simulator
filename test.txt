@@ -1,0 +1,24 @@
+#include <Arduino.h>
+#include "IRremote.h"
+#define pinIR 4
+IRrecv irrecv(pinIR);
+decode_results results;
+
+
+void setup() {
+ Serial.begin(9600);
+ delay(1000);
+ irrecv.enableIRIn();
+}
+
+void loop(){
+  if (irrecv.decode(&results)){
+        Serial.println(results.value, HEX);
+        irrecv.resume();
+  }
+}
+
+/*
+1   FF30CF
+2   FF18E7
+*/
